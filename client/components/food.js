@@ -12,9 +12,15 @@ export default class Food extends React.Component {
 }
 
 const Title = styled.h1`
+  position: relative;
+  top: 400px;
+  left: 80px;
   font-size: 1.5em;
   text-align: center;
   color: palevioletred;
+  height: 50px;
+  width: 50px;
+  border-style: solid;
 `
 
 const Wrapper = styled.section`

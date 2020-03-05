@@ -1,6 +1,5 @@
 import React from 'react'
 import {Navbar, Welcome, Food} from './components'
-import Routes from './routes'
 
 const App = () => {
   return (
