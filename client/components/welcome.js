@@ -5,14 +5,20 @@ export default class Welcome extends React.Component {
   render() {
     return (
       <Wrapper>
-        <Title>PLACEHOLDER FOR WELCOME</Title>
+        <Title
+          onClick={() =>
+            alert('sneak attack - populate with updated flight info')
+          }
+        >
+          ✨MEXICO CITY✨
+        </Title>
       </Wrapper>
     )
   }
 }
 
 const Title = styled.h1`
-  font-size: 1.5em;
+  font-size: 5em;
   text-align: center;
   color: palevioletred;
 `
