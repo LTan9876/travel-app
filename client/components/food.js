@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import FoodFacts from './foodFacts'
 
 export default class Food extends React.Component {
   constructor() {
@@ -14,16 +15,15 @@ export default class Food extends React.Component {
   }
 
   render() {
-    console.log('from food page', this)
     return (
       <div>
         <Wrapper>
-          <Onion onClick={() => this.updateFood('onion')} />
+          <Fried onClick={() => this.updateFood('fried')} />
           <Tacos onClick={() => this.updateFood('taco')} />
           <Salsa onClick={() => this.updateFood('salsa')} />
-          <Guac onClick={() => this.updateFood('guac')} />
+          <Guacamole onClick={() => this.updateFood('guacamole')} />
         </Wrapper>
-        <p>INSERT Ternary COMPONENT HERE</p>
+        <FoodFacts food={this.state} />
       </div>
     )
   }
@@ -42,7 +42,7 @@ const Tacos = styled.div`
   text-align: center;
   color: palevioletred;
 `
-const Guac = styled.div`
+const Guacamole = styled.div`
   position: relative;
   bottom: 100px;
   left: 1050px;
@@ -70,7 +70,7 @@ const Salsa = styled.div`
   color: palevioletred;
 `
 
-const Onion = styled.div`
+const Fried = styled.div`
   position: relative;
   top: 200px;
   left: 615px;
