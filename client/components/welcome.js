@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 export default class Welcome extends React.Component {
   render() {
+    console.log('this from welcome page', this)
     return (
       <Wrapper>
         <Title
