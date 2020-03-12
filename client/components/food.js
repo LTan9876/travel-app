@@ -1,29 +1,48 @@
 import React from 'react'
 import styled from 'styled-components'
+import FoodFacts from './foodFacts'
+import Axios from 'axios'
 
 export default class Food extends React.Component {
   constructor() {
     super()
     this.state = {
-      food: ''
+      food: '',
+      clicked: false,
+      info: []
     }
+    this.getInfo = this.getInfo.bind(this)
   }
 
-  updateFood = value => {
-    this.setState({food: value})
+  updateFood = foodName => {
+    this.setState({
+      food: foodName,
+      clicked: true
+    })
+    this.getInfo(foodName)
+  }
+
+  async getInfo(foodName) {
+    let {data} = await Axios.get(`/api/food/${foodName}`)
+    this.setState({
+      info: data.description
+    })
   }
 
   render() {
-    console.log('from food page', this)
     return (
       <div>
         <Wrapper>
-          <Onion onClick={() => this.updateFood('onion')} />
-          <Tacos onClick={() => this.updateFood('taco')} />
-          <Salsa onClick={() => this.updateFood('salsa')} />
-          <Guac onClick={() => this.updateFood('guac')} />
+          <Fried onClick={() => this.updateFood('Bistek')} />
+          <Tacos onClick={() => this.updateFood('Taco')} />
+          <Salsa onClick={() => this.updateFood('Salsa')} />
+          <Guacamole onClick={() => this.updateFood('Guacamole')} />
         </Wrapper>
-        <p>INSERT Ternary COMPONENT HERE</p>
+        {this.state.clicked ? (
+          <FoodFacts food={this.state.info} name={this.state.food} />
+        ) : (
+          <div />
+        )}
       </div>
     )
   }
@@ -42,7 +61,7 @@ const Tacos = styled.div`
   text-align: center;
   color: palevioletred;
 `
-const Guac = styled.div`
+const Guacamole = styled.div`
   position: relative;
   bottom: 100px;
   left: 1050px;
@@ -70,7 +89,7 @@ const Salsa = styled.div`
   color: palevioletred;
 `
 
-const Onion = styled.div`
+const Fried = styled.div`
   position: relative;
   top: 200px;
   left: 615px;
