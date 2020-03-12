@@ -1,29 +1,48 @@
 import React from 'react'
 import styled from 'styled-components'
 import FoodFacts from './foodFacts'
+import Axios from 'axios'
 
 export default class Food extends React.Component {
   constructor() {
     super()
     this.state = {
-      food: ''
+      food: '',
+      clicked: false,
+      info: []
     }
+    this.getInfo = this.getInfo.bind(this)
   }
 
-  updateFood = value => {
-    this.setState({food: value})
+  updateFood = foodName => {
+    this.setState({
+      food: foodName,
+      clicked: true
+    })
+    this.getInfo(foodName)
+  }
+
+  async getInfo(foodName) {
+    let {data} = await Axios.get(`/api/food/${foodName}`)
+    this.setState({
+      info: data.description
+    })
   }
 
   render() {
     return (
       <div>
         <Wrapper>
-          <Fried onClick={() => this.updateFood('fried')} />
-          <Tacos onClick={() => this.updateFood('taco')} />
-          <Salsa onClick={() => this.updateFood('salsa')} />
-          <Guacamole onClick={() => this.updateFood('guacamole')} />
+          <Fried onClick={() => this.updateFood('Bistek')} />
+          <Tacos onClick={() => this.updateFood('Taco')} />
+          <Salsa onClick={() => this.updateFood('Salsa')} />
+          <Guacamole onClick={() => this.updateFood('Guacamole')} />
         </Wrapper>
-        <FoodFacts food={this.state} />
+        {this.state.clicked ? (
+          <FoodFacts food={this.state.info} name={this.state.food} />
+        ) : (
+          <div />
+        )}
       </div>
     )
   }
