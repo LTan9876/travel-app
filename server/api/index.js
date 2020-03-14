@@ -1,5 +1,6 @@
 const router = require('express').Router()
 module.exports = router
+require('dotenv').config()
 
 router.use('/users', require('./users'))
 router.use('/food', require('./food'))
