@@ -26,7 +26,7 @@ export default class Food extends React.Component {
   async getInfo(foodName) {
     let {data} = await Axios.get(`/api/food/${foodName}`)
     let stores = await Axios.get(
-      `{'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?term=${foodName}&latitude=19.4326&longitude=-99.1332`,
+      `${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?term=${foodName}&latitude=19.4326&longitude=-99.1332`,
       {
         headers: {
           Authorization: `Bearer ${process.env.YELP_API_KEY}`
@@ -35,12 +35,11 @@ export default class Food extends React.Component {
     )
     this.setState({
       info: data.description,
-      yelp: stores
+      yelp: stores.data.businesses.slice(0, 5)
     })
   }
 
   render() {
-    console.log('?????', this.state.yelp)
     return (
       <div>
         <Wrapper>
@@ -50,7 +49,11 @@ export default class Food extends React.Component {
           <Guacamole onClick={() => this.updateFood('Guacamole')} />
         </Wrapper>
         {this.state.clicked ? (
-          <FoodFacts food={this.state.info} name={this.state.food} />
+          <FoodFacts
+            food={this.state.info}
+            name={this.state.food}
+            stores={this.state.yelp}
+          />
         ) : (
           <div />
         )}
