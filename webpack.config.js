@@ -1,4 +1,6 @@
 const isDev = process.env.NODE_ENV === 'development'
+const webpack = require('webpack')
+const Dotenv = require('dotenv-webpack')
 
 module.exports = {
   mode: isDev ? 'development' : 'production',
@@ -25,5 +27,12 @@ module.exports = {
         loader: 'babel-loader'
       }
     ]
-  }
+  },
+  plugins: [
+    new Dotenv(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.YELP_API_KEY': JSON.stringify(process.env.YELP_API_KEY)
+    })
+  ]
 }

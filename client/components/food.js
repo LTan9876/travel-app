@@ -9,7 +9,8 @@ export default class Food extends React.Component {
     this.state = {
       food: '',
       clicked: false,
-      info: []
+      info: [],
+      yelp: []
     }
     this.getInfo = this.getInfo.bind(this)
   }
@@ -24,12 +25,22 @@ export default class Food extends React.Component {
 
   async getInfo(foodName) {
     let {data} = await Axios.get(`/api/food/${foodName}`)
+    let stores = await Axios.get(
+      `{'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?term=${foodName}&latitude=19.4326&longitude=-99.1332`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.YELP_API_KEY}`
+        }
+      }
+    )
     this.setState({
-      info: data.description
+      info: data.description,
+      yelp: stores
     })
   }
 
   render() {
+    console.log('?????', this.state.yelp)
     return (
       <div>
         <Wrapper>
