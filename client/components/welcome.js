@@ -7,7 +7,9 @@ export default class Welcome extends React.Component {
       <Wrapper>
         <Title
           onClick={() =>
-            alert('sneak attack - populate with updated flight info')
+            alert(
+              'https://www.nytimes.com/2018/06/13/travel/mexico-city-family-travel.html'
+            )
           }
         >
           ✨MEXICO CITY✨
@@ -21,6 +23,7 @@ const Title = styled.h1`
   font-size: 5em;
   text-align: center;
   color: palevioletred;
+  cursor: pointer;
 `
 
 const Wrapper = styled.section`
