@@ -10,6 +10,7 @@ https://www.yelp.com/developers/documentation/v3/authentication
 2. Create a .env file in the root, paste in the keys from above
 
 YELP_API_KEY = insert yelp api key
+
 YELP_CLIENT_KEY = insert yelp client key
 
 4. Run npm run start
